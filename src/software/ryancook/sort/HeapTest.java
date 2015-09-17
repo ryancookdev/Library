@@ -6,12 +6,13 @@ import static org.junit.Assert.*;
 public class HeapTest
 {
     char[] list;
+    private Heap heap;
 
     @Test
     public void sortEmptyList() throws Exception
     {
         list = getChars("");
-        Heap heap = new Heap(list);
+        heap = new Heap(list);
         heap.sort();
         confirm("");
     }
@@ -20,7 +21,7 @@ public class HeapTest
     public void sortListWithOneItem() throws Exception
     {
         list = getChars("a");
-        Heap heap = new Heap(list);
+        heap = new Heap(list);
         heap.sort();
         confirm("a");
     }
@@ -29,7 +30,7 @@ public class HeapTest
     public void sortSortedList() throws Exception
     {
         list = getChars("abcdefghijklmnopqrstuvwxyz");
-        Heap heap = new Heap(list);
+        heap = new Heap(list);
         heap.sort();
         confirm("abcdefghijklmnopqrstuvwxyz");
     }
@@ -38,7 +39,7 @@ public class HeapTest
     public void sortReverseSortedList() throws Exception
     {
         list = getChars("zyxwvutsrqponmlkjihgfedcba");
-        Heap heap = new Heap(list);
+        heap = new Heap(list);
         heap.sort();
         confirm("abcdefghijklmnopqrstuvwxyz");
     }
@@ -47,7 +48,7 @@ public class HeapTest
     public void sortRandomList() throws Exception
     {
         list = getChars("roznaqpecgwfbdivmklhjuysxt");
-        Heap heap = new Heap(list);
+        heap = new Heap(list);
         heap.sort();
         confirm("abcdefghijklmnopqrstuvwxyz");
     }

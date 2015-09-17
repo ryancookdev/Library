@@ -2,6 +2,7 @@ package software.ryancook.sort;
 
 public class Heap
 {
+    private static final int PARENT_CHILD_INDEX_MULTIPLIER = 2;
     char[] list;
 
     public Heap(char[] list)
@@ -20,7 +21,6 @@ public class Heap
 
     private void heapify()
     {
-        // Call siftDown() for every parent node, last to first
         int lastParentIndex = getParentIndex(getLastIndex());
         int lastIndex = getLastIndex();
         for (int i = lastParentIndex; i >= 0; i--) {
@@ -28,37 +28,35 @@ public class Heap
         }
     }
 
-    // Improved version
-    private void siftDown(int index, int end)
-    {
-        int leftChild = getLeftChildIndex(index);
-        int rightChild = getRightChildIndex(index);
+    private void siftDown(int index, int end) {
+        while (true) { // JVM is not yet optimizing tail recursion
+            int leftChild = getLeftChildIndex(index);
+            int rightChild = getRightChildIndex(index);
 
-        boolean noChildren = (leftChild > end);
-        if (noChildren) {
-            return;
+            boolean noChildren = (leftChild > end);
+            if (noChildren) {
+                return;
+            }
+
+            int maxChild = getMaxChild(end, leftChild, rightChild);
+            boolean heapOrdered = (list[index] >= list[maxChild]);
+            if (heapOrdered) {
+                return;
+            }
+
+            swap(index, maxChild);
+            index = maxChild;
         }
-
-        int maxChild = getMaxChild(end, leftChild, rightChild);
-        boolean heapOrdered = (list[index] >= list[maxChild]);
-        if (heapOrdered) {
-            return;
-        }
-
-        swap(index, maxChild);
-        siftDown(maxChild, end);
     }
 
     private int getMaxChild(int end, int leftChild, int rightChild) {
-        int maxChild;
         if (rightChild > end) {
-            maxChild = leftChild;
+            return leftChild;
         } else if (list[leftChild] > list[rightChild]) {
-            maxChild = leftChild;
+            return leftChild;
         } else {
-            maxChild = rightChild;
+            return rightChild;
         }
-        return maxChild;
     }
 
     private int getLastIndex()
@@ -66,19 +64,22 @@ public class Heap
         return list.length - 1;
     }
 
-    private int getParentIndex(int childIndex)
+    private int getParentIndex(int index)
     {
-        return Math.floorDiv(childIndex + 1, 2) - 1;
+        return Math.floorDiv(
+            index + 1,
+            PARENT_CHILD_INDEX_MULTIPLIER
+        ) - 1;
     }
 
-    private int getLeftChildIndex(int parentIndex)
+    private int getLeftChildIndex(int index)
     {
-        return getRightChildIndex(parentIndex) - 1;
+        return getRightChildIndex(index) - 1;
     }
 
-    private int getRightChildIndex(int parentIndex)
+    private int getRightChildIndex(int index)
     {
-        return (parentIndex + 1) * 2;
+        return (index + 1) * PARENT_CHILD_INDEX_MULTIPLIER;
     }
 
     private void swap(int a, int b)
