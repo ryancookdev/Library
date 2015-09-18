@@ -1,19 +1,27 @@
 package software.ryancook.sort;
 
-import org.junit.*;
-import static org.junit.Assert.*;
+import jdk.nashorn.internal.ir.annotations.Ignore;
+import org.junit.Before;
+import org.junit.Test;
 
-public class HeapTest
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+
+public class MergeSortTest
 {
     private char[] list;
-    private Heap heap;
+    private MergeSort mergeSort;
+
+    @Before
+    public void setUp() throws Exception {
+        mergeSort = new MergeSort();
+    }
 
     @Test
     public void sortEmptyList() throws Exception
     {
         list = getChars("");
-        heap = new Heap(list);
-        heap.sort();
+        mergeSort.sort(list);
         confirm("");
     }
 
@@ -21,8 +29,7 @@ public class HeapTest
     public void sortListWithOneItem() throws Exception
     {
         list = getChars("a");
-        heap = new Heap(list);
-        heap.sort();
+        mergeSort.sort(list);
         confirm("a");
     }
 
@@ -30,8 +37,7 @@ public class HeapTest
     public void sortSortedList() throws Exception
     {
         list = getChars("abcdefghijklmnopqrstuvwxyz");
-        heap = new Heap(list);
-        heap.sort();
+        mergeSort.sort(list);
         confirm("abcdefghijklmnopqrstuvwxyz");
     }
 
@@ -39,8 +45,7 @@ public class HeapTest
     public void sortReverseSortedList() throws Exception
     {
         list = getChars("zyxwvutsrqponmlkjihgfedcba");
-        heap = new Heap(list);
-        heap.sort();
+        mergeSort.sort(list);
         confirm("abcdefghijklmnopqrstuvwxyz");
     }
 
@@ -48,8 +53,7 @@ public class HeapTest
     public void sortRandomList() throws Exception
     {
         list = getChars("roznaqpecgwfbdivmklhjuysxt");
-        heap = new Heap(list);
-        heap.sort();
+        mergeSort.sort(list);
         confirm("abcdefghijklmnopqrstuvwxyz");
     }
 

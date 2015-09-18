@@ -29,7 +29,7 @@ public class Heap
     }
 
     private void siftDown(int index, int end) {
-        while (true) { // JVM is not yet optimizing tail recursion
+        while (true) {
             int leftChild = getLeftChildIndex(index);
             int rightChild = getRightChildIndex(index);
 
