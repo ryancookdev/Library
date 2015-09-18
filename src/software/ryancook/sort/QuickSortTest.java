@@ -1,24 +1,27 @@
 package software.ryancook.sort;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
-public class MergeSortTest
+import static org.junit.Assert.*;
+
+public class QuickSortTest
 {
     private char[] list;
-    private MergeSort mergeSort;
+    private QuickSort quickSort;
 
     @Before
-    public void setUp() throws Exception {
-        mergeSort = new MergeSort();
+    public void setUp() throws Exception
+    {
+        quickSort = new QuickSort();
     }
 
     @Test
     public void sortEmptyList() throws Exception
     {
         list = getChars("");
-        mergeSort.sort(list);
+        quickSort.sort(list);
         confirm("");
     }
 
@@ -26,7 +29,7 @@ public class MergeSortTest
     public void sortListWithOneItem() throws Exception
     {
         list = getChars("a");
-        mergeSort.sort(list);
+        quickSort.sort(list);
         confirm("a");
     }
 
@@ -34,7 +37,7 @@ public class MergeSortTest
     public void sortSortedList() throws Exception
     {
         list = getChars("abcdefghijklmnopqrstuvwxyz");
-        mergeSort.sort(list);
+        quickSort.sort(list);
         confirm("abcdefghijklmnopqrstuvwxyz");
     }
 
@@ -42,7 +45,7 @@ public class MergeSortTest
     public void sortReverseSortedList() throws Exception
     {
         list = getChars("zyxwvutsrqponmlkjihgfedcba");
-        mergeSort.sort(list);
+        quickSort.sort(list);
         confirm("abcdefghijklmnopqrstuvwxyz");
     }
 
@@ -50,7 +53,7 @@ public class MergeSortTest
     public void sortRandomList() throws Exception
     {
         list = getChars("roznaqpecgwfbdivmklhjuysxt");
-        mergeSort.sort(list);
+        quickSort.sort(list);
         confirm("abcdefghijklmnopqrstuvwxyz");
     }
 
