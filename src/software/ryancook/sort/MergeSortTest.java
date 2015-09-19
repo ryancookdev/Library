@@ -6,7 +6,6 @@ import static org.junit.Assert.assertEquals;
 
 public class MergeSortTest
 {
-    private char[] list;
     private MergeSort mergeSort;
 
     @Before
@@ -17,50 +16,43 @@ public class MergeSortTest
     @Test
     public void sortEmptyList() throws Exception
     {
-        list = getChars("");
+        char[] list = new char[]{};
         mergeSort.sort(list);
-        confirm("");
+        assertEquals("", new String(list));
     }
 
     @Test
     public void sortListWithOneItem() throws Exception
     {
-        list = getChars("a");
+        char[] list = new char[]{'a'};
         mergeSort.sort(list);
-        confirm("a");
+        assertEquals("a", new String(list));
     }
 
     @Test
     public void sortSortedList() throws Exception
     {
-        list = getChars("abcdefghijklmnopqrstuvwxyz");
+        char[] list = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         mergeSort.sort(list);
-        confirm("abcdefghijklmnopqrstuvwxyz");
+        String expected = "abcdefghijklmnopqrstuvwxyz";
+        assertEquals(expected, new String(list));
     }
 
     @Test
     public void sortReverseSortedList() throws Exception
     {
-        list = getChars("zyxwvutsrqponmlkjihgfedcba");
+        char[] list = "zyxwvutsrqponmlkjihgfedcba".toCharArray();
         mergeSort.sort(list);
-        confirm("abcdefghijklmnopqrstuvwxyz");
+        String expected = "abcdefghijklmnopqrstuvwxyz";
+        assertEquals(expected, new String(list));
     }
 
     @Test
     public void sortRandomList() throws Exception
     {
-        list = getChars("roznaqpecgwfbdivmklhjuysxt");
+        char[] list = "roznaqpecgwfbdivmklhjuysxt".toCharArray();
         mergeSort.sort(list);
-        confirm("abcdefghijklmnopqrstuvwxyz");
-    }
-
-    private char[] getChars(String s)
-    {
-        return s.toCharArray();
-    }
-
-    private void confirm(String expected)
-    {
+        String expected = "abcdefghijklmnopqrstuvwxyz";
         assertEquals(expected, new String(list));
     }
 }

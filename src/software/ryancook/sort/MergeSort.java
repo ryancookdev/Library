@@ -1,11 +1,12 @@
 package software.ryancook.sort;
 
-public class MergeSort {
+public class MergeSort implements Sortable
+{
     char[] list;
     char[] tempList;
 
-    public void sort(char[] list) {
-        this.list = list;
+    public void sort(char[] charList) {
+        list = charList;
         tempList = new char[list.length];
         topDownSplitMerge(0, list.length);
     }

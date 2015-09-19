@@ -5,61 +5,53 @@ import static org.junit.Assert.*;
 
 public class HeapTest
 {
-    private char[] list;
     private Heap heap;
 
     @Test
     public void sortEmptyList() throws Exception
     {
-        list = getChars("");
+        char[] list = new char[]{};
         heap = new Heap(list);
         heap.sort();
-        confirm("");
+        assertEquals("", new String(list));
     }
 
     @Test
     public void sortListWithOneItem() throws Exception
     {
-        list = getChars("a");
+        char[] list = new char[]{'a'};
         heap = new Heap(list);
         heap.sort();
-        confirm("a");
+        assertEquals("a", new String(list));
     }
 
     @Test
     public void sortSortedList() throws Exception
     {
-        list = getChars("abcdefghijklmnopqrstuvwxyz");
+        char[] list = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         heap = new Heap(list);
         heap.sort();
-        confirm("abcdefghijklmnopqrstuvwxyz");
+        String expected = "abcdefghijklmnopqrstuvwxyz";
+        assertEquals(expected, new String(list));
     }
 
     @Test
     public void sortReverseSortedList() throws Exception
     {
-        list = getChars("zyxwvutsrqponmlkjihgfedcba");
+        char[] list = "zyxwvutsrqponmlkjihgfedcba".toCharArray();
         heap = new Heap(list);
         heap.sort();
-        confirm("abcdefghijklmnopqrstuvwxyz");
+        String expected = "abcdefghijklmnopqrstuvwxyz";
+        assertEquals(expected, new String(list));
     }
 
     @Test
     public void sortRandomList() throws Exception
     {
-        list = getChars("roznaqpecgwfbdivmklhjuysxt");
+        char[] list = "roznaqpecgwfbdivmklhjuysxt".toCharArray();
         heap = new Heap(list);
         heap.sort();
-        confirm("abcdefghijklmnopqrstuvwxyz");
-    }
-
-    private char[] getChars(String s)
-    {
-        return s.toCharArray();
-    }
-
-    private void confirm(String expected)
-    {
+        String expected = "abcdefghijklmnopqrstuvwxyz";
         assertEquals(expected, new String(list));
     }
 }

@@ -5,34 +5,21 @@ import static org.junit.Assert.*;
 
 public class LibraryTest
 {
-    char[] list;
-
-    @Before
-    public void setUp() throws Exception {
-        list = getChars("ryancookiedough");
-    }
-
     @Test
     public void testInsertionSort() throws Exception
     {
+        char[] list = "zyxwvutsrqponmlkjihgfedcba".toCharArray();
         Library.insertionSort(list);
-        confirm("acdeghiknoooruy");
+        String expected = "abcdefghijklmnopqrstuvwxyz";
+        assertEquals(expected, new String(list));
     }
 
     @Test
     public void testSelectionSort() throws Exception
     {
+        char[] list = "zyxwvutsrqponmlkjihgfedcba".toCharArray();
         Library.selectionSort(list);
-        confirm("acdeghiknoooruy");
-    }
-
-    private char[] getChars(String s)
-    {
-        return s.toCharArray();
-    }
-
-    private void confirm(String expected)
-    {
+        String expected = "abcdefghijklmnopqrstuvwxyz";
         assertEquals(expected, new String(list));
     }
 }

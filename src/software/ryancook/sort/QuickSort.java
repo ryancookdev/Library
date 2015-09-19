@@ -1,12 +1,13 @@
 package software.ryancook.sort;
 
-public class QuickSort
+public class QuickSort implements Sortable
 {
     char[] list;
 
-    public void sort(char[] list)
+    @Override
+    public void sort(char[] charList)
     {
-        this.list = list;
+        list = charList;
         quickSort(0, list.length - 1);
     }
 
@@ -38,7 +39,7 @@ public class QuickSort
         return i;
     }
 
-    private void swap(int a, int b)
+    protected void swap(int a, int b)
     {
         char temp = list[a];
         list[a] = list[b];

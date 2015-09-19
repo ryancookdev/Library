@@ -1,69 +1,67 @@
 package software.ryancook.sort;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class QuickSortTest
 {
-    private char[] list;
-    private QuickSort quickSort;
+    private Sortable sortable;
 
     @Before
     public void setUp() throws Exception
     {
-        quickSort = new QuickSort();
+        sortable = new QuickSort();
     }
 
     @Test
-    public void sortEmptyList() throws Exception
+    public void sortEmptyListOfChars() throws Exception
     {
-        list = getChars("");
-        quickSort.sort(list);
+        char[] charList = new char[]{};
+        sortable.sort(charList);
+        assertEquals("", new String(charList));
+    }
+
+    /*@Test
+    public void sortEmptyListOfInts() throws Exception
+    {
+        int[] intList = new int[0];
+        sortable.sort(list);
         confirm("");
+    }*/
+
+    @Test
+    public void sortListWithOneChar() throws Exception
+    {
+        char[] charList = new char[]{'a'};
+        sortable.sort(charList);
+        assertEquals("a", new String(charList));
     }
 
     @Test
-    public void sortListWithOneItem() throws Exception
+    public void sortSortedListOfChars() throws Exception
     {
-        list = getChars("a");
-        quickSort.sort(list);
-        confirm("a");
+        char[] charList = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        sortable.sort(charList);
+        String expected = "abcdefghijklmnopqrstuvwxyz";
+        assertEquals(expected, new String(charList));
     }
 
     @Test
-    public void sortSortedList() throws Exception
+    public void sortReverseSortedListOfChars() throws Exception
     {
-        list = getChars("abcdefghijklmnopqrstuvwxyz");
-        quickSort.sort(list);
-        confirm("abcdefghijklmnopqrstuvwxyz");
+        char[] charList = "zyxwvutsrqponmlkjihgfedcba".toCharArray();
+        sortable.sort(charList);
+        String expected = "abcdefghijklmnopqrstuvwxyz";
+        assertEquals(expected, new String(charList));
     }
 
     @Test
-    public void sortReverseSortedList() throws Exception
+    public void sortRandomListOfChars() throws Exception
     {
-        list = getChars("zyxwvutsrqponmlkjihgfedcba");
-        quickSort.sort(list);
-        confirm("abcdefghijklmnopqrstuvwxyz");
-    }
-
-    @Test
-    public void sortRandomList() throws Exception
-    {
-        list = getChars("roznaqpecgwfbdivmklhjuysxt");
-        quickSort.sort(list);
-        confirm("abcdefghijklmnopqrstuvwxyz");
-    }
-
-    private char[] getChars(String s)
-    {
-        return s.toCharArray();
-    }
-
-    private void confirm(String expected)
-    {
-        assertEquals(expected, new String(list));
+        char[] charList = "roznaqpecgwfbdivmklhjuysxt".toCharArray();
+        sortable.sort(charList);
+        String expected = "abcdefghijklmnopqrstuvwxyz";
+        assertEquals(expected, new String(charList));
     }
 }
