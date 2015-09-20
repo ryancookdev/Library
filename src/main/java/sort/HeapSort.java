@@ -5,9 +5,9 @@ public class HeapSort
     private static final int PARENT_CHILD_INDEX_MULTIPLIER = 2;
     char[] list;
 
-    public void sort(char[] list)
+    public void sort(char[] charList)
     {
-        this.list = list;
+        list = charList;
         heapify();
         heapSort();
     }
