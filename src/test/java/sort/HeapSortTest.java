@@ -3,16 +3,21 @@ package software.ryancook.sort;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-public class HeapTest
+public class HeapSortTest
 {
-    private Heap heap;
+    private HeapSort heapSort;
+
+    @Before
+    public void setUp() throws Exception
+    {
+        heapSort = new HeapSort();
+    }
 
     @Test
     public void sortEmptyList() throws Exception
     {
         char[] list = new char[]{};
-        heap = new Heap(list);
-        heap.sort();
+        heapSort.sort(list);
         assertEquals("", new String(list));
     }
 
@@ -20,8 +25,7 @@ public class HeapTest
     public void sortListWithOneItem() throws Exception
     {
         char[] list = new char[]{'a'};
-        heap = new Heap(list);
-        heap.sort();
+        heapSort.sort(list);
         assertEquals("a", new String(list));
     }
 
@@ -29,8 +33,7 @@ public class HeapTest
     public void sortSortedList() throws Exception
     {
         char[] list = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-        heap = new Heap(list);
-        heap.sort();
+        heapSort.sort(list);
         String expected = "abcdefghijklmnopqrstuvwxyz";
         assertEquals(expected, new String(list));
     }
@@ -39,8 +42,7 @@ public class HeapTest
     public void sortReverseSortedList() throws Exception
     {
         char[] list = "zyxwvutsrqponmlkjihgfedcba".toCharArray();
-        heap = new Heap(list);
-        heap.sort();
+        heapSort.sort(list);
         String expected = "abcdefghijklmnopqrstuvwxyz";
         assertEquals(expected, new String(list));
     }
@@ -49,8 +51,7 @@ public class HeapTest
     public void sortRandomList() throws Exception
     {
         char[] list = "roznaqpecgwfbdivmklhjuysxt".toCharArray();
-        heap = new Heap(list);
-        heap.sort();
+        heapSort.sort(list);
         String expected = "abcdefghijklmnopqrstuvwxyz";
         assertEquals(expected, new String(list));
     }

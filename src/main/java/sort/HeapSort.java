@@ -1,17 +1,18 @@
 package software.ryancook.sort;
 
-public class Heap
+public class HeapSort
 {
     private static final int PARENT_CHILD_INDEX_MULTIPLIER = 2;
     char[] list;
 
-    public Heap(char[] list)
+    public void sort(char[] list)
     {
         this.list = list;
         heapify();
+        heapSort();
     }
 
-    public void sort()
+    private void heapSort()
     {
         for (int i = getLastIndex(); i >= 0; i--) {
             swap(0, i);
