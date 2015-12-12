@@ -1,14 +1,25 @@
 package software.ryancook.sort;
 
+import java.util.*;
+
 public class MergeSort implements Sortable
 {
-    char[] list;
-    char[] tempList;
+    List<Integer> list;
+    List<Integer> tempList;
 
-    public void sort(char[] charList) {
-        list = charList;
-        tempList = new char[list.length];
-        topDownSplitMerge(0, list.length);
+    @Override
+    public void sort(List a) {
+        list = a;
+        tempList = new ArrayList<>(5);
+        prefillZeroes(tempList, list.size());
+        topDownSplitMerge(0, list.size());
+    }
+
+    private void prefillZeroes(List list, int size)
+    {
+        for (int i = 0; i < size; i++) {
+            list.add(0);
+        }
     }
 
     private void topDownSplitMerge(int iBegin, int iEnd)
@@ -21,13 +32,14 @@ public class MergeSort implements Sortable
         topDownSplitMerge(iBegin, iMiddle);
         topDownSplitMerge(iMiddle, iEnd);
         topDownMerge(iBegin, iMiddle, iEnd);
-        copyArray(iBegin, iEnd);
+        copyList(iBegin, iEnd);
     }
 
-    private void copyArray(int iBegin, int iEnd)
+    private void copyList(int iBegin, int iEnd)
     {
-        int length = iEnd - iBegin;
-        System.arraycopy(tempList, iBegin, list, iBegin, length);
+        for (int i = iBegin; i < iEnd; i++) {
+            list.set(i, tempList.get(i));
+        }
     }
 
     private void topDownMerge(int iBegin, int iMiddle, int iEnd)
@@ -36,11 +48,13 @@ public class MergeSort implements Sortable
         int headSecondHalf = iMiddle;
 
         for (int i = iBegin; i < iEnd; i++) {
-            if (headFirstHalf < iMiddle && (headSecondHalf >= iEnd || list[headFirstHalf] <= list[headSecondHalf])) {
-                tempList[i] = list[headFirstHalf];
+            if (headFirstHalf < iMiddle
+                    && (headSecondHalf >= iEnd
+                    || list.get(headFirstHalf) <= list.get(headSecondHalf))) {
+                tempList.set(i, list.get(headFirstHalf));
                 headFirstHalf = headFirstHalf + 1;
             } else {
-                tempList[i] = list[headSecondHalf];
+                tempList.set(i, list.get(headSecondHalf));
                 headSecondHalf = headSecondHalf + 1;
             }
         }

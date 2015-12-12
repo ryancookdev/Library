@@ -1,6 +1,8 @@
 package software.ryancook.sort;
 
+import java.util.List;
+
 public interface Sortable
 {
-    void sort(char[] charList);
+    void sort(List a);
 }

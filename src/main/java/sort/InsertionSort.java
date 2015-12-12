@@ -1,31 +1,34 @@
 package software.ryancook.sort;
 
-public class InsertionSort
-{
-    private char[] list;
+import java.util.List;
 
-    public void sort(char[] charList)
+public class InsertionSort implements Sortable
+{
+    private List<Integer> list;
+
+    @Override
+    public void sort(List a)
     {
-        list = charList;
+        list = a;
         insertionSort();
     }
 
     public void insertionSort()
     {
-        int lastIndex = list.length - 1;
+        int lastIndex = list.size() - 1;
         for (int i = 1; i <= lastIndex; i++) {
             for (int j = i; j > 0; j--) {
-                if (list[j - 1] > list[j]) {
+                if (list.get(j - 1) > list.get(j)) {
                     swap(j - 1, j);
                 }
             }
         }
     }
 
-    private void swap(int a, int b)
+    protected void swap(int a, int b)
     {
-        char temp = list[a];
-        list[a] = list[b];
-        list[b] = temp;
+        Integer temp = list.get(a);
+        list.set(a, list.get(b));
+        list.set(b, temp);
     }
 }

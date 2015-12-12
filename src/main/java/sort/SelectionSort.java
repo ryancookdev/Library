@@ -1,13 +1,16 @@
 package software.ryancook.sort;
 
+import java.util.List;
+
 public class SelectionSort implements Sortable
 {
     static final boolean asserts = true;
-    private char[] list;
+    private List<Integer> list;
 
-    public void sort(char[] charList)
+    @Override
+    public void sort(List a)
     {
-        list = charList;
+        list = a;
         selectionSort();
     }
 
@@ -16,7 +19,7 @@ public class SelectionSort implements Sortable
         // For assertion
         int totalComparisons = 0;
 
-        int lastIndex = list.length - 1;
+        int lastIndex = list.size() - 1;
         for (int i = 0; i < lastIndex; i++) {
             int minIndex = i;
             for (int j = i + 1; j <= lastIndex; j++) {
@@ -24,7 +27,7 @@ public class SelectionSort implements Sortable
                     assertNoSelfComparison(i, j);
                     totalComparisons++;
                 }
-                if (list[minIndex] > list[j]) {
+                if (list.get(minIndex) > list.get(j)) {
                     minIndex = j;
                 }
             }
@@ -38,7 +41,7 @@ public class SelectionSort implements Sortable
 
     private void assertTriangleNumberComparisons(int comparisonTotal)
     {
-        int triangleNumber = (list.length - 1) * list.length / 2;
+        int triangleNumber = (list.size() - 1) * list.size() / 2;
         assert (triangleNumber == comparisonTotal) : "Should not exceed n(n+1)/2 total comparisons";
     }
 
@@ -49,8 +52,8 @@ public class SelectionSort implements Sortable
 
     private void swap(int a, int b)
     {
-        char temp = list[a];
-        list[a] = list[b];
-        list[b] = temp;
+        Integer temp = list.get(a);
+        list.set(a, list.get(b));
+        list.set(b, temp);
     }
 }

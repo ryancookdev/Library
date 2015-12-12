@@ -1,7 +1,7 @@
 package software.ryancook.sort;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+import java.util.*;
 import static org.junit.Assert.*;
 
 public class QuickSortTest
@@ -15,53 +15,68 @@ public class QuickSortTest
     }
 
     @Test
-    public void sortEmptyListOfChars() throws Exception
+    public void sortEmptyList() throws Exception
     {
-        char[] charList = new char[]{};
-        sortable.sort(charList);
-        assertEquals("", new String(charList));
-    }
+        List<Integer> expected = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
 
-    /*@Test
-    public void sortEmptyListOfInts() throws Exception
-    {
-        int[] intList = new int[0];
         sortable.sort(list);
-        confirm("");
-    }*/
-
-    @Test
-    public void sortListWithOneChar() throws Exception
-    {
-        char[] charList = new char[]{'a'};
-        sortable.sort(charList);
-        assertEquals("a", new String(charList));
+        assertEquals(expected, list);
     }
 
     @Test
-    public void sortSortedListOfChars() throws Exception
+    public void sortListWithOneItem() throws Exception
     {
-        char[] charList = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-        sortable.sort(charList);
-        String expected = "abcdefghijklmnopqrstuvwxyz";
-        assertEquals(expected, new String(charList));
+        List<Integer> expected = new ArrayList<>();
+        expected.add(1);
+
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+
+        sortable.sort(list);
+        assertEquals(expected, list);
     }
 
     @Test
-    public void sortReverseSortedListOfChars() throws Exception
+    public void sortOrderedList() throws Exception
     {
-        char[] charList = "zyxwvutsrqponmlkjihgfedcba".toCharArray();
-        sortable.sort(charList);
-        String expected = "abcdefghijklmnopqrstuvwxyz";
-        assertEquals(expected, new String(charList));
+        List<Integer> expected = new ArrayList<>();
+        TestHelper.populateOrderedList(expected, 5);
+
+        List<Integer> list = new ArrayList<>();
+        TestHelper.populateOrderedList(list, 5);
+
+        sortable.sort(list);
+        assertEquals(expected, list);
     }
 
     @Test
-    public void sortRandomListOfChars() throws Exception
+    public void sortReverseOrderedList() throws Exception
     {
-        char[] charList = "roznaqpecgwfbdivmklhjuysxt".toCharArray();
-        sortable.sort(charList);
-        String expected = "abcdefghijklmnopqrstuvwxyz";
-        assertEquals(expected, new String(charList));
+        List<Integer> expected = new ArrayList<>();
+        TestHelper.populateOrderedList(expected, 5);
+
+        List<Integer> list = new ArrayList<>();
+        TestHelper.populateReverseOrderedList(list, 5);
+
+        sortable.sort(list);
+        assertEquals(expected, list);
+    }
+
+    @Test
+    public void sortRandomList() throws Exception
+    {
+        List<Integer> expected = new ArrayList<>();
+        TestHelper.populateOrderedList(expected, 5);
+
+        List<Integer> list = new ArrayList<>();
+        list.add(3);
+        list.add(5);
+        list.add(1);
+        list.add(4);
+        list.add(2);
+
+        sortable.sort(list);
+        assertEquals(expected, list);
     }
 }

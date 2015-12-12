@@ -1,14 +1,16 @@
 package software.ryancook.sort;
 
+import java.util.List;
+
 public class QuickSort implements Sortable
 {
-    char[] list;
+    List<Integer> list;
 
     @Override
-    public void sort(char[] charList)
+    public void sort(List a)
     {
-        list = charList;
-        quickSort(0, list.length - 1);
+        list = a;
+        quickSort(0, list.size() - 1);
     }
 
     private void quickSort(int lo, int hi)
@@ -27,10 +29,10 @@ public class QuickSort implements Sortable
 
     private int partition (int lo, int hi)
     {
-        char pivot = list[hi];
+        Integer pivot = list.get(hi);
         int i = lo;
         for (int j = lo; j < hi; j++) {
-            if (list[j] <= pivot) {
+            if (list.get(j) <= pivot) {
                 swap(i, j);
                 i++;
             }
@@ -41,8 +43,8 @@ public class QuickSort implements Sortable
 
     protected void swap(int a, int b)
     {
-        char temp = list[a];
-        list[a] = list[b];
-        list[b] = temp;
+        Integer temp = list.get(a);
+        list.set(a, list.get(b));
+        list.set(b, temp);
     }
 }

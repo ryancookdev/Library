@@ -1,13 +1,16 @@
 package software.ryancook.sort;
 
-public class HeapSort
+import java.util.List;
+
+public class HeapSort implements Sortable
 {
     private static final int PARENT_CHILD_INDEX_MULTIPLIER = 2;
-    char[] list;
+    List<Integer> list;
 
-    public void sort(char[] charList)
+    @Override
+    public void sort(List a)
     {
-        list = charList;
+        list = a;
         heapify();
         heapSort();
     }
@@ -40,7 +43,7 @@ public class HeapSort
             }
 
             int maxChild = getMaxChild(end, leftChild, rightChild);
-            boolean heapOrdered = (list[index] >= list[maxChild]);
+            boolean heapOrdered = (list.get(index) >= list.get(maxChild));
             if (heapOrdered) {
                 return;
             }
@@ -53,7 +56,7 @@ public class HeapSort
     private int getMaxChild(int end, int leftChild, int rightChild) {
         if (rightChild > end) {
             return leftChild;
-        } else if (list[leftChild] > list[rightChild]) {
+        } else if (list.get(leftChild) > list.get(rightChild)) {
             return leftChild;
         } else {
             return rightChild;
@@ -62,7 +65,7 @@ public class HeapSort
 
     private int getLastIndex()
     {
-        return list.length - 1;
+        return list.size() - 1;
     }
 
     private int getParentIndex(int index)
@@ -83,10 +86,10 @@ public class HeapSort
         return (index + 1) * PARENT_CHILD_INDEX_MULTIPLIER;
     }
 
-    private void swap(int a, int b)
+    protected void swap(int a, int b)
     {
-        char temp = list[a];
-        list[a] = list[b];
-        list[b] = temp;
+        Integer temp = list.get(a);
+        list.set(a, list.get(b));
+        list.set(b, temp);
     }
 }
